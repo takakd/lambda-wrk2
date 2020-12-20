@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+
+CUR_DIR=$(
+	cd $(dirname $0)
+	pwd
+)
+CDK_DIR="${CUR_DIR}/aws-cdk"
+WRK2_CMD_DIR="${CUR_DIR}/wrk2-cmd"
+WRK2_SCRIPT_DIR="${WRK2_CMD_DIR}/script"
+
+# Default value
+WRK2_SCRIPT_PATH="${WRK2_SCRIPT_DIR}/wrk2/post.lua"
+OUTPUT_DIR_PATH="${CUR_DIR}/output"
+
+# Load env
+if [[ -e "${CUR_DIR}/.env" ]]; then
+	export $(cat "${CUR_DIR}/.env" | grep -v ^# | xargs) >/dev/null
+fi
+
+function usage() {
+	cat <<EOF
+usage: lambdawrk2 [command]
+
+lambdawrk2 run wrk2 on AWS Lambda. Set options through environment variable. For more information, see $(.env.example).
+
+Command:
+
+    setup       create AWS resources, get wrk2 from GitHub
+    destroy     cleanup AWS resources
+    run         run wrk2
+
+EOF
+	exit 0
+}
+
+# Setup CDK environment
+function setupCdk() {
+	# Install node modules
+	if [[ ! -e "${CDK_DIR}/node_modules" ]]; then
+		cd "$CDK_DIR"
+		npm install
+		npm run build
+		cd "$CUR_DIR"
+	fi
+}
+
+# Setup Wrk2 environment
+function setupWrk2() {
+	# Clone wrk2
+	if [[ ! -e "${WRK2_CMD_DIR}/docker/wrk2" ]]; then
+		git clone git@github.com:giltene/wrk2.git "${WRK2_CMD_DIR}/docker/wrk2"
+	fi
+
+	# Install node modules
+	if [[ ! -e "${WRK2_SCRIPT_DIR}/node_modules" ]]; then
+		cd "$WRK2_SCRIPT_DIR"
+		npm install
+		cd "$CUR_DIR"
+	fi
+}
+
+# setup command
+function setup() {
+	setupWrk2
+	setupCdk
+
+	# Create AWS resources
+	cd "$CDK_DIR"
+	cdk deploy
+}
+
+# destroy command
+function destroy() {
+	setupCdk
+
+	# Destroy AWS resources
+	cd "$CDK_DIR"
+	cdk destroy
+}
+
+# run command
+function run() {
+	# Run
+	cd "$WRK2_SCRIPT_DIR"
+	npm run build
+	npm run start \
+		--aws_stackname="$AWS_STACK_NAME" \
+		--aws_profile="$AWS_PROFILE" \
+		--aws_region="$AWS_DEFAULT_REGION" \
+		--aws_key="$AWS_ACCESS_KEY_ID" \
+		--aws_secret="$AWS_SECRET_ACCESS_KEY" \
+		--parallel="$PARALLEL_COUNT" \
+		--wrk2_thread="$WRK2_THREAD" \
+		--wrk2_connection="$WRK2_CONNECTION" \
+		--wrk2_duration="$WRK2_DURATION" \
+		--wrk2_request_per_sec="$WRK2_REQUEST_PER_SEC" \
+		--wrk2_timeout="$WRK2_TIMEOUT" \
+		--wrk2_url="$WRK2_URL" \
+		--wrk2_script_path="$WRK2_SCRIPT_PATH" \
+		--output_dir_path="$OUTPUT_DIR_PATH"
+}
+
+# Parse commands and arguments.
+CMD='usage'
+for OPT in "$@"; do
+	case "$OPT" in
+	setup)
+		CMD='setup'
+		;;
+	destroy)
+		CMD='destroy'
+		;;
+	run)
+		CMD='run'
+		;;
+	*)
+		WRK2_SCRIPT="$OPT"
+		;;
+	esac
+	shift
+done
+
+# Run command.
+case "$CMD" in
+usage)
+	usage
+	;;
+setup)
+	setup
+	;;
+destroy)
+	destroy
+	;;
+run)
+	run
+	;;
+esac

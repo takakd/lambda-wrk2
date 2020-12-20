@@ -1,0 +1,30 @@
+{
+  "name": "wrk2-cmd",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node src/index.js --aws_stackname=$npm_config_aws_stackname --aws_profile=$npm_config_aws_profile --aws_region=$npm_config_aws_region --aws_key=$npm_config_aws_key --aws_secret=$npm_config_awssecret --parallel=$npm_config_parallel --wrk2_thread=$npm_config_wrk2_thread --wrk2_connection=$npm_config_wrk2_connection --wrk2_duration=$npm_config_wrk2_duration --wrk2_request_per_sec=$npm_config_wrk2_request_per_sec --wrk2_timeout=$npm_config_wrk2_timeout --wrk2_url=$npm_config_wrk2_url --wrk2_script_path=$npm_config_wrk2_script_path --output_dir_path=$npm_config_output_dir_path",
+    "build": "tsc src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint **/*.ts *.js \\.*.js --quiet",
+    "fix": "eslint **/*.ts *.js  \\.*.js --fix --quiet"
+  },
+  "author": "takakd",
+  "license": "MIT",
+  "dependencies": {
+    "@types/minimist": "^1.2.1",
+    "@types/node": "^14.14.14",
+    "@types/ora": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "aws-sdk": "^2.814.0",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "minimist": "^1.2.5",
+    "ora": "^5.1.0",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}

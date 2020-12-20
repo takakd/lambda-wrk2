@@ -1,0 +1,10 @@
+docker/wrk2
+
+*.js
+!.eslintrc.js
+!.prettierrc.js
+*.d.ts
+script/node_modules
+script/wrk2
+!script/wrk2/post.example.lua
+script/package-lock.json
