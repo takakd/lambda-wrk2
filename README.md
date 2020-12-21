@@ -1,13 +1,12 @@
-# Lambda-wrk2
+<h1 align="center">Lambda-wrk2</h1>
 
 The Command to run [`wrk2`](https://github.com/giltene/wrk2) on [`AWS Lambda`](https://aws.amazon.com/jp/lambda/). 
 
+<hr>
+
+![License-MIT](https://img.shields.io/badge/License-MIT-informational?style=flat)
+
 > ⚠️ `Lambda-wrk2` is for load testing. Do not use `Lambda-wrk2` to attack. Authors do not warrant any damages resulting from it. Please use one for your own responsibility.
-
-
-![Huge rolling wave](docs/austin-schmid-_rThRCcLV6U-unsplash_modified.jpg?raw=true)
-
-<span>Photo by <a href="https://unsplash.com/@schmidy?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Austin Schmid</a> on <a href="https://unsplash.com/s/photos/wave?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
 ## Table of Contents
 
@@ -31,9 +30,13 @@ The Command to run [`wrk2`](https://github.com/giltene/wrk2) on [`AWS Lambda`](h
 * [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)
 * [AWS IAM User Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) 
 
+
+### 1. Create IAM User executing wrk2 on Lambda
+
 WIP: need iam policy requirement
 
-### 1. Set environment variables
+
+### 2. Set environment variables
 
 Copy `.env.sample` to `.env`.
 
@@ -43,7 +46,7 @@ $ cp .env.sample .env
 
 Then, set environment variables in `.env`. For more information, see comments in [`.env.sample`](.env.sample).
 
-### 2. Create AWS resources
+### 3. Create AWS resources
 
 Run setup command and enter `y` when being confirmed to create AWS stack.
 
@@ -178,7 +181,7 @@ Running 5s test @ https://....herokuapp.com
 
 ### Setup
 
-[Setup](#setup) installs required resources.
+[Setup](#setup) installs all required resources.
 
 ### Structure
 
@@ -192,7 +195,52 @@ WIP
 
 #### Sources
 
-WIP
+```sh
+.
+|-- .env.sample         <-- environment variables samples
+|-- .gitignore
+|-- LICENSE
+|-- README.md
+|-- aws-cdk             <-- AWS CDK Kit with TypeScrpit
+|   |-- .eslintrc.js
+|   |-- .gitignore
+|   |-- .npmignore      
+|   |-- .prettierrc.js
+|   |-- README.md
+|   |-- bin
+|   |   `-- aws.ts      <-- CDK entrypoint script
+|   |-- cdk.json        <-- CDK setting
+|   |-- jest.config.js
+|   |-- lib                         <-- CDK fragment scripts
+|   |   `-- lambda-wrk2-service.ts  <-- lambda-wrk2 Stack CDK script
+|   |-- package.json
+|   |-- test            <-- jest scripts 
+|   `-- tsconfig.json
+|
+|-- docs
+|-- lambdawrk2      <-- lamda-wrk2 command script
+|-- output          <-- Directory to be output results
+`-- wrk2-cmd            <-- wrk2 assets
+    |
+    |-- docker          <-- Docker image files to run on Lambda
+    |   |-- Dockerfile
+    |   |-- function.sh
+    |   `-- wrk2        <-- wrk2 files
+    |
+    `-- script
+        |-- .eslintrc.js
+        |-- .prettierrc.js
+        |-- package.json
+        |-- tsconfig.json
+        |
+        |-- src         <-- Lambda execution script
+        |   |-- index.ts
+        |   `-- wrk2cmd.ts 
+        |
+        `-- wrk2        <-- wrk2 lua scripts
+            |-- post.example.lua
+            `-- get.example.lua
+```
 
 ## Get in touch
 
@@ -209,3 +257,50 @@ Welcome to issues and reviews. Don't hesitate to create issues and PR.
 - Copyright 2020 © takakd.
 - License of `wrk2` is [here](https://github.com/giltene/wrk2)
 
+```
+.
+|-- .env.sample
+|-- .gitignore
+|-- LICENSE
+|-- README.md
+|-- aws-cdk
+|   |-- .eslintrc.js
+|   |-- .gitignore
+|   |-- .npmignore
+|   |-- .prettierrc.js
+|   |-- README.md
+|   |-- bin
+|   |   `-- aws.ts
+|   |-- cdk.json
+|   |-- cdk.out
+|   |-- jest.config.js
+|   |-- lib
+|   |   |-- lambda-wrk2-service.d.ts
+|   |   |-- lambda-wrk2-service.js
+|   |   `-- lambda-wrk2-service.ts
+|   |-- package.json
+|   |-- test
+|   |-- text
+|   `-- tsconfig.json
+|-- docs
+|-- lambdawrk2
+|-- output
+`-- wrk2-cmd
+    |-- .gitignore
+    |-- docker
+    |   |-- Dockerfile
+    |   |-- function.sh
+    |   `-- wrk2
+    `-- script
+        |-- .eslintrc.js
+        |-- .prettierrc.js
+        |-- package.json
+        |-- src
+        |   |-- index.ts
+        |   `-- wrk2cmd.ts
+        |-- tsconfig.json
+        `-- wrk2
+            |-- get.lua
+            |-- post.example.lua
+            `-- post.lua
+```
