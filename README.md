@@ -5,19 +5,16 @@
 <p align="center">
 <a target="_blank" rel="noopener noreferrer" href="https://camo.githubusercontent.com/a568b3692dcc72af17d4abfed1b2c81d47f05dcaaefb021c9f9d3d6a856d3e6e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d696e666f726d6174696f6e616c3f7374796c653d666c6174"><img src="https://camo.githubusercontent.com/a568b3692dcc72af17d4abfed1b2c81d47f05dcaaefb021c9f9d3d6a856d3e6e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d696e666f726d6174696f6e616c3f7374796c653d666c6174" alt="License-MIT" data-canonical-src="https://img.shields.io/badge/License-MIT-informational?style=flat" style="max-width:100%;"></a>
 </p>
-
 > ⚠️ `Lambda-wrk2` is for load testing. Do not use `Lambda-wrk2` to attack. Authors do not warrant any damages resulting from it. Please use one for your own responsibility.
-
-<br>
 <br>
 
 ## Table of Contents
 
-* Features
-* Setup
-* Usage
-* Development
-* License
+- [Features](#features)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Development](#development)
+- [License](#license)
 
 ## Features
 
@@ -115,7 +112,7 @@ arn:aws:cloudformation:ap-northeast-1:...
 
 ## Usage
 
-### 1. Set environment variables.
+### 1. Set environment variables
 
 Set environment variables related to `wrk2` in `.env`.
 
@@ -198,7 +195,7 @@ Running 5s test @ https://....herokuapp.com
 
 #### Design
 
-![Design](website/design.jpg?raw=true)
+![Design](docs/design.jpg?raw=true)
 
 #### Sources
 
