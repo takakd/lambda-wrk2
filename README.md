@@ -1,12 +1,15 @@
 <h1 align="center">Lambda-wrk2</h1>
 
-<p align="center">The Command to run <a href="https://github.com/giltene/wrk2">wrk2</a> on <a href="https://aws.amazon.com/jp/lambda/">AWS Lambda</a>. </p>
+<p align="center">Run <a href="https://github.com/giltene/wrk2">wrk2</a> on <a href="https://aws.amazon.com/jp/lambda/">AWS Lambda</a>.</p>
 
 <p align="center">
 <a target="_blank" rel="noopener noreferrer" href="https://camo.githubusercontent.com/a568b3692dcc72af17d4abfed1b2c81d47f05dcaaefb021c9f9d3d6a856d3e6e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d696e666f726d6174696f6e616c3f7374796c653d666c6174"><img src="https://camo.githubusercontent.com/a568b3692dcc72af17d4abfed1b2c81d47f05dcaaefb021c9f9d3d6a856d3e6e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d696e666f726d6174696f6e616c3f7374796c653d666c6174" alt="License-MIT" data-canonical-src="https://img.shields.io/badge/License-MIT-informational?style=flat" style="max-width:100%;"></a>
 </p>
 
 > ⚠️ `Lambda-wrk2` is for load testing. Do not use `Lambda-wrk2` to attack. Authors do not warrant any damages resulting from it. Please use one for your own responsibility.
+
+<br>
+<br>
 
 ## Table of Contents
 
@@ -19,7 +22,7 @@
 ## Features
 
 * Run wrk2 in parallel on AWS Lambda.
-* Control wrk2 [`lua` scripts](https://github.com/giltene/wrk2/tree/master/scripts).
+* Control wrk2 [lua scripts](https://github.com/giltene/wrk2/tree/master/scripts).
 
 ## Setup
 
@@ -27,14 +30,18 @@
 
 * [Node.js](https://nodejs.org/en/) v14.15.3, npm 6.14.9
 * [Docker](https://www.docker.com/) version 19.03.12, build 48a66213fe
-* [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)
+* [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html) 1.78.0 (build 2c74f4c)
 * [AWS IAM User Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) 
 
 
-### 1. Create IAM User executing wrk2 on Lambda
+### 1. Create IAM User
 
-WIP: need iam policy requirement
+Create IAM User attached following settings in your AWS Account.
 
+#### IAM User setting
+
+* Allow programmatic access.
+* Attach policies by [lambda-wrk2-policy.json](aws-cdk/lambda-wrk2-policy.json).
 
 ### 2. Set environment variables
 
@@ -191,7 +198,7 @@ Running 5s test @ https://....herokuapp.com
 
 #### Design
 
-WIP
+![Design](website/design.jpg?raw=true)
 
 #### Sources
 
@@ -208,9 +215,10 @@ WIP
 |   |-- .prettierrc.js
 |   |-- README.md
 |   |-- bin
-|   |   `-- aws.ts      <-- CDK entrypoint script
-|   |-- cdk.json        <-- CDK setting
+|   |   `-- aws.ts          <-- CDK entrypoint script
+|   |-- cdk.json            <-- CDK setting
 |   |-- jest.config.js
+|   |-- lambda-wrk2-policy.json     <-- IAM User Policy
 |   |-- lib                         <-- CDK fragment scripts
 |   |   `-- lambda-wrk2-service.ts  <-- lambda-wrk2 Stack CDK script
 |   |-- package.json
@@ -256,51 +264,3 @@ Welcome to issues and reviews. Don't hesitate to create issues and PR.
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright 2020 © takakd.
 - License of `wrk2` is [here](https://github.com/giltene/wrk2)
-
-```
-.
-|-- .env.sample
-|-- .gitignore
-|-- LICENSE
-|-- README.md
-|-- aws-cdk
-|   |-- .eslintrc.js
-|   |-- .gitignore
-|   |-- .npmignore
-|   |-- .prettierrc.js
-|   |-- README.md
-|   |-- bin
-|   |   `-- aws.ts
-|   |-- cdk.json
-|   |-- cdk.out
-|   |-- jest.config.js
-|   |-- lib
-|   |   |-- lambda-wrk2-service.d.ts
-|   |   |-- lambda-wrk2-service.js
-|   |   `-- lambda-wrk2-service.ts
-|   |-- package.json
-|   |-- test
-|   |-- text
-|   `-- tsconfig.json
-|-- docs
-|-- lambdawrk2
-|-- output
-`-- wrk2-cmd
-    |-- .gitignore
-    |-- docker
-    |   |-- Dockerfile
-    |   |-- function.sh
-    |   `-- wrk2
-    `-- script
-        |-- .eslintrc.js
-        |-- .prettierrc.js
-        |-- package.json
-        |-- src
-        |   |-- index.ts
-        |   `-- wrk2cmd.ts
-        |-- tsconfig.json
-        `-- wrk2
-            |-- get.lua
-            |-- post.example.lua
-            `-- post.lua
-```
