@@ -31,6 +31,8 @@ The Command to run [`wrk2`](https://github.com/giltene/wrk2) on [`AWS Lambda`](h
 * [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)
 * [AWS IAM User Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) 
 
+WIP: need iam policy requirement
+
 ### 1. Set environment variables
 
 Copy `.env.sample` to `.env`.
@@ -151,6 +153,7 @@ The outputs look like this.
 
 Results are in a directory, which is set in `.env`.
 
+**e.g. 6bb06529-8fe0-4eb4-991e-428dc8376757.txt**
 ```
 20201221093901
 6bb06529-8fe0-4eb4-991e-428dc8376757
@@ -169,9 +172,9 @@ Running 5s test @ https://....herokuapp.com
 
 ### Tech stacks
 
-* AWS: Lambda, S3, CloudWatch, CDK
+* AWS: Lambda, S3, CloudWatch, [CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)
 * TypeScript, Bash
-* wrk2
+* [wrk2](https://github.com/giltene/wrk2)
 
 ### Setup
 
@@ -204,3 +207,5 @@ Welcome to issues and reviews. Don't hesitate to create issues and PR.
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright 2020 © takakd.
+- License of `wrk2` is [here](https://github.com/giltene/wrk2)
+
