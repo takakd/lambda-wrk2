@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/logo.svg" /></p>
+<p align="center"><img src="docs/logo.svg" width="210"/></p>
 <h1 align="center">Lambda-wrk2</h1>
 
 <p align="center">Run <a href="https://github.com/giltene/wrk2">wrk2</a> on <a href="https://aws.amazon.com/jp/lambda/">AWS Lambda</a>.</p>
