@@ -5,6 +5,4 @@ docker/wrk2
 !.prettierrc.js
 *.d.ts
 script/node_modules
-script/wrk2
-!script/wrk2/post.example.lua
 script/package-lock.json
