@@ -1,3 +1,4 @@
+<p align="center"><img src="docs/logo.svg" /></p>
 <h1 align="center">Lambda-wrk2</h1>
 
 <p align="center">Run <a href="https://github.com/giltene/wrk2">wrk2</a> on <a href="https://aws.amazon.com/jp/lambda/">AWS Lambda</a>.</p>
@@ -27,41 +28,42 @@
 
 ### Requirements
 
+* macOS 10.15.5
 * [Node.js](https://nodejs.org/en/) v14.15.3, npm 6.14.9
 * [Docker](https://www.docker.com/) version 19.03.12, build 48a66213fe
 * [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html) 1.78.0 (build 2c74f4c)
-* [AWS IAM User Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) 
+* [AWS IAM user credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) 
 
 
-### 1. Create IAM User
+### 1. Create IAM user
 
-Create IAM User attached following settings in your AWS Account.
+Create IAM user attached following settings in your AWS Account.
 
-#### IAM User setting
+#### IAM user setting
 
 * Allow programmatic access.
 * Attach policies by [lambda-wrk2-policy.json](aws-cdk/lambda-wrk2-policy.json).
 
 ### 2. Set environment variables
 
-Copy `.env.sample` to `.env`.
+Copy `.env.example` to `.env`.
 
 ```sh
 $ cp .env.sample .env
 ```
 
-Then, set environment variables in `.env`. For more information, see comments in [`.env.sample`](.env.sample).
+Then, set environment variables in `.env`. For more information, see comments in [`.env.example`](.env.example).
 
 ### 3. Create AWS resources
 
-Run setup command and enter `y` when being confirmed to create AWS stack.
+Run setup command and enter `y` when asked to create AWS stack.
 
 ```sh
 # Run setup command.
 $ ./lambdawrk2 setup
 ```
 
-The outputs look like this.
+The outputs will look like this.
 
 ```sh
 Cloning into '/Users/.../lambda-wrk2/wrk2-cmd/docker/wrk2'...
@@ -90,15 +92,15 @@ IAM Statement Changes
 ```
 
 ```sh
-# Enter `y` when being confirmed to create AWS stack.
+# Enter `y` when asked to create AWS stack.
 Do you wish to deploy these changes (y/n)? y
 ```
 
 ```sh
 TestStack: deploying...
-[0%] start: Publishing 8e85dbadda9a3fb477815b4430401402b136e99d6c6991db630c4d96e638b9b0:current
+[0%] start: Publishing XXXXXXXXXX9a3fb477815b4430401402b136e99d6c6991db630c4d96e638b9b0:current
 ...
-[100%] success: Published 8e85dbadda9a3fb477815b4430401402b136e99d6c6991db630c4d96e638b9b0:current
+[100%] success: Published XXXXXXXXXX9a3fb477815b4430401402b136e99d6c6991db630c4d96e638b9b0:current
 TestStack: creating CloudFormation changeset...
 [██████████████████████████████████████████████████████████] (6/6)
 ...
@@ -116,18 +118,18 @@ arn:aws:cloudformation:ap-northeast-1:...
 
 ### 1. Set environment variables
 
-Set environment variables related to `wrk2` in `.env`.
+Set environment variables in `.env`.
 
 ```
 PARALLEL_COUNT=2, WRK2_THREAD=2, WRK2_CONNECTION=2...
 ```
 
-For more information, see comments in [`.env.sample`](.env.sample) and [`wrk2` README](https://github.com/giltene/wrk2).
+For more information, see comments in [`.env.example`](.env.example) and [`wrk2` README](https://github.com/giltene/wrk2).
 
 ### 2. Set wrk2 script
 
-Set request properties in wrk2 `lua` script and script file path to `.env`.  
-The script examples is in `wrk2-cmd/script/wrk2`. For more information, see  [`wrk2 scripts`](https://github.com/giltene/wrk2/trae/master/scripts).
+Set request properties in wrk2 `lua` script and it's file path to `.env`.  
+The script examples is in `wrk2-cmd/script/wrk2`. For more information, see  [`wrk2 scripts`](https://github.com/giltene/wrk2/tree/master/scripts).
 
 ### 3. Run wrk2
 
@@ -138,7 +140,7 @@ Run wrk2 on Lambda.
 ./lambda-wrk2 run
 ```
 
-The outputs look like this.
+The outputs will look like this.
 
 ```sh
 > wrk2-cmd@1.0.0 build /Users/.../lambda-wrk2/wrk2-cmd/script
@@ -153,21 +155,21 @@ The outputs look like this.
 ✔ update Lambda environment variables
 ✔ upload wrk2 script file
 ✔ invoked each Lambda
-✔ waiting for each Lambda to end, they will output results in teststack-teststackworkbucket69bf4ac9-14ou8wvykgxbf bucket
+✔ waiting for each Lambda to end, they will output results in xxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx bucket
 ✔ download results
 🦄 done. check results in /Users/.../lambda-wrk2/output/20201221093901/result
 ```
 
 ### 4. Check results
 
-Results are in a directory, which is set in `.env`.
+Results will be in a directory which path is set at `OUTPUT_DIR_PATH` in `.env`.
 
-**e.g. 6bb06529-8fe0-4eb4-991e-428dc8376757.txt**
+**e.g. xxxxxxxx-8fe0-xxxx-991e-428dc8376757.txt**
 ```
 20201221093901
-6bb06529-8fe0-4eb4-991e-428dc8376757
-run ./wrk -t2 -c2 -d5s -R1 -s /tmp/get.lua -T 5 --latency https://....herokuapp.com
-Running 5s test @ https://....herokuapp.com
+xxxxxxxx-8fe0-xxxx-991e-428dc8376757
+run ./wrk -t2 -c2 -d5s -R1 -s /tmp/get.lua -T 5 --latency https://...herokuapp.com
+Running 5s test @ https://...herokuapp.com
   2 threads and 2 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
     Latency     -nanus    -nanus   0.00us    0.00%
@@ -181,9 +183,10 @@ Running 5s test @ https://....herokuapp.com
 
 ### Tech stacks
 
-* AWS: Lambda, S3, CloudWatch, [CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)
+* AWS: Lambda, S3, CloudWatch, CDK
+* Node.js, Docker
 * TypeScript, Bash
-* [wrk2](https://github.com/giltene/wrk2)
+* wrk2
 
 ### Setup
 
@@ -191,8 +194,8 @@ Running 5s test @ https://....herokuapp.com
 
 ### Structure
 
-* AWS CDK for creating AWS resources.
-* AWS SDK for controlling to execute Lambda.
+* AWS CDK creates AWS resources.
+* AWS SDK controls to execute Lambda.
 * Lambda runs `wrk2` docker container image.
 
 #### Design
@@ -203,7 +206,7 @@ Running 5s test @ https://....herokuapp.com
 
 ```sh
 .
-|-- .env.sample         <-- environment variables samples
+|-- .env.example        <-- Environment variables examples
 |-- .gitignore
 |-- LICENSE
 |-- README.md
@@ -217,22 +220,22 @@ Running 5s test @ https://....herokuapp.com
 |   |   `-- aws.ts          <-- CDK entrypoint script
 |   |-- cdk.json            <-- CDK setting
 |   |-- jest.config.js
-|   |-- lambda-wrk2-policy.json     <-- IAM User Policy
-|   |-- lib                         <-- CDK fragment scripts
+|   |-- lambda-wrk2-policy.json     <-- IAM user policy
+|   |-- lib                         <-- Fragments of CDK script
 |   |   `-- lambda-wrk2-service.ts  <-- lambda-wrk2 Stack CDK script
 |   |-- package.json
-|   |-- test            <-- jest scripts 
+|   |-- test                <-- Jest scripts 
 |   `-- tsconfig.json
 |
 |-- docs
 |-- lambdawrk2      <-- lamda-wrk2 command script
-|-- output          <-- Directory to be output results
+|-- output          <-- Output directory for results
 `-- wrk2-cmd            <-- wrk2 assets
     |
-    |-- docker          <-- Docker image files to run on Lambda
+    |-- docker              <-- Docker image files to run on Lambda
     |   |-- Dockerfile
-    |   |-- function.sh
-    |   `-- wrk2        <-- wrk2 files
+    |   |-- function.sh     <-- Script to run on a docker container
+    |   `-- wrk2            <-- wrk2 GitHub clone
     |
     `-- script
         |-- .eslintrc.js
@@ -240,7 +243,7 @@ Running 5s test @ https://....herokuapp.com
         |-- package.json
         |-- tsconfig.json
         |
-        |-- src         <-- Lambda execution script
+        |-- src         <-- Fragments of script to use in lambdawrk2 command.
         |   |-- index.ts
         |   `-- wrk2cmd.ts 
         |
@@ -256,10 +259,11 @@ Running 5s test @ https://....herokuapp.com
 
 ## Contributing
 
-Welcome to issues and reviews. Don't hesitate to create issues and PR.
+Issues and reviews are welcome. Don't hesitate to create issues and PR.
 
 ## License
 
-- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- `wrk2` license is [here](https://github.com/giltene/wrk2)
+- Lambda-wrk2 license is **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright 2020 © takakd.
-- License of `wrk2` is [here](https://github.com/giltene/wrk2)
+

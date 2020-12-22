@@ -6,6 +6,10 @@
       "Effect": "Allow",
       "Action": [
         "cloudformation:*",
+        "ecr:SetRepositoryPolicy",
+        "ecr:DescribeImages",
+        "ecr:DescribeRepositories",
+        "ecr:GetRepositoryPolicy"
         "iam:GetRole",
         "iam:DeleteRole",
         "iam:CreateRole",
@@ -14,9 +18,6 @@
         "iam:PassRole",
         "iam:DetachRolePolicy",
         "iam:DeleteRolePolicy",
-        "ecr:SetRepositoryPolicy",
-        "ecr:DescribeImages",
-        "ecr:DescribeRepositories",
         "lambda:CreateFunction",
         "lambda:GetFunction",
         "lambda:UpdateFunctionConfiguration",
@@ -28,7 +29,6 @@
         "s3:PutEncryptionConfiguration",
         "s3:PutObject",
         "s3:GetObject",
-        "ecr:GetRepositoryPolicy"
       ],
       "Resource": "*"
     }
