@@ -1,7 +1,7 @@
 <p align="center"><img src="docs/logo.svg" width="80"/></p>
 <h1 align="center">Lambda-wrk2</h1>
 
-<p align="center">Script set to run <a href="https://github.com/giltene/wrk2">wrk2</a> on <a href="https://aws.amazon.com/jp/lambda/">AWS Lambda</a>.</p>
+<p align="center">Scripts to run <a href="https://github.com/giltene/wrk2">wrk2</a> on <a href="https://aws.amazon.com/jp/lambda/">AWS Lambda</a>.</p>
 
 <p align="center">
 <a target="_blank" rel="noopener noreferrer" href="https://camo.githubusercontent.com/a568b3692dcc72af17d4abfed1b2c81d47f05dcaaefb021c9f9d3d6a856d3e6e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d696e666f726d6174696f6e616c3f7374796c653d666c6174"><img src="https://camo.githubusercontent.com/a568b3692dcc72af17d4abfed1b2c81d47f05dcaaefb021c9f9d3d6a856d3e6e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d696e666f726d6174696f6e616c3f7374796c653d666c6174" alt="License-MIT" data-canonical-src="https://img.shields.io/badge/License-MIT-informational?style=flat" style="max-width:100%;"></a>
