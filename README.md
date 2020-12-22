@@ -45,9 +45,9 @@ Create IAM user attached following settings in your AWS Account.
 * Allow programmatic access.
 * Attach policies by [lambda-wrk2-policy.json](aws-cdk/lambda-wrk2-policy.json).
 
-**Ref:**
+Ref:
 * [Creating an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
-* [Create and attach a policy to an IAM use](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-and-attach-iam-policy.html
+* [Create and attach a policy to an IAM use](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-and-attach-iam-policy.html)
 
 ### 2. Set environment variables
 
