@@ -9,7 +9,7 @@
         "ecr:SetRepositoryPolicy",
         "ecr:DescribeImages",
         "ecr:DescribeRepositories",
-        "ecr:GetRepositoryPolicy"
+        "ecr:GetRepositoryPolicy",
         "iam:GetRole",
         "iam:DeleteRole",
         "iam:CreateRole",
@@ -28,7 +28,7 @@
         "s3:ListBucket",
         "s3:PutEncryptionConfiguration",
         "s3:PutObject",
-        "s3:GetObject",
+        "s3:GetObject"
       ],
       "Resource": "*"
     }
